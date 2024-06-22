@@ -5,20 +5,26 @@
     <p>{{ displayedWord.join(' ') }}</p>
     <p>Intentos restantes: {{ remainingAttempts }}</p>
 
+    <!-- Input para adivinar letra y botón -->
     <div [hidden]="gameOver">
       <p>Adivina una letra:</p>
       <input #letterInput type="text" maxlength="1" />
       <button (click)="guessLetter(letterInput.value); letterInput.value=''" [hidden]="gameOver">Adivinar</button>
     </div>
 
+    <!-- Mensaje de juego terminado -->
     <div [hidden]="!gameOver" class="game-message">
-      <div *ngIf="gameWon">
+      <!-- Mensaje de ganar -->
+      <div [hidden]="!gameWon">
         <p>¡Ganaste!</p>
+        <button (click)="startNewGame()">Jugar de nuevo</button>
       </div>
-      <div *ngIf="!gameWon">
-        <p>¡Perdiste! La palabra era: {{ word }}</p>
+
+      <!-- Mensaje de perder -->
+      <div [hidden]="gameWon">
+        <p>¡Perdiste! La palabra era: {{ lostWord }}</p>
+        <button (click)="startNewGame()">Jugar de nuevo</button>
       </div>
-      <button (click)="startNewGame()">Jugar de nuevo</button>
     </div>
   </div>
 </div>
