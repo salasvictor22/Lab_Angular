@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WordService } from '../word-service.service';
 
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -14,6 +13,7 @@ export class GameComponent implements OnInit {
   remainingAttempts: number = 6;
   gameOver: boolean = false;
   gameWon: boolean = false;
+  lostWord: string = ''; 
 
   constructor(private wordService: WordService) { }
 
@@ -28,6 +28,7 @@ export class GameComponent implements OnInit {
     this.remainingAttempts = 6;
     this.gameOver = false;
     this.gameWon = false;
+    this.lostWord = ''; 
   }
 
   guessLetter(letter: string): void {
@@ -48,6 +49,7 @@ export class GameComponent implements OnInit {
       this.remainingAttempts--;
       if (this.remainingAttempts === 0) {
         this.gameOver = true;
+        this.lostWord = this.word; 
       }
     }
   }
@@ -57,5 +59,9 @@ export class GameComponent implements OnInit {
       this.gameWon = true;
       this.gameOver = true;
     }
+  }
+
+  startNewGame(): void {
+    this.startGame();
   }
 }

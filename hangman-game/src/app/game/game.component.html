@@ -1,15 +1,24 @@
-<h1>Ahorcado</h1>
-<p>{{ displayedWord.join(' ') }}</p>
-<p>Intentos restantes: {{ remainingAttempts }}</p>
-<div *ngIf="gameOver && gameWon">
-  <p>¡Ganaste!</p>
-  <button (click)="startGame()">Jugar de nuevo</button>
-</div>
-<div *ngIf="gameOver && !gameWon">
-  <p>¡Perdiste! La palabra era: {{ word }}</p>
-  <button (click)="startGame()">Jugar de nuevo</button>
-</div>
-<div *ngIf="!gameOver">
-  <p>Adivina una letra:</p>
-  <input #letterInput type="text" maxlength="1" (keyup.enter)="guessLetter(letterInput.value); letterInput.value=''" />
+<div class="game-container">
+  <div class="game-content">
+    <h1>Ahorcado</h1>
+
+    <p>{{ displayedWord.join(' ') }}</p>
+    <p>Intentos restantes: {{ remainingAttempts }}</p>
+
+    <div [hidden]="gameOver">
+      <p>Adivina una letra:</p>
+      <input #letterInput type="text" maxlength="1" />
+      <button (click)="guessLetter(letterInput.value); letterInput.value=''" [hidden]="gameOver">Adivinar</button>
+    </div>
+
+    <div [hidden]="!gameOver" class="game-message">
+      <div *ngIf="gameWon">
+        <p>¡Ganaste!</p>
+      </div>
+      <div *ngIf="!gameWon">
+        <p>¡Perdiste! La palabra era: {{ word }}</p>
+      </div>
+      <button (click)="startNewGame()">Jugar de nuevo</button>
+    </div>
+  </div>
 </div>

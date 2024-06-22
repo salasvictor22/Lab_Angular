@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class WordService {
-  private words = [
-    'angular', 'typescript', 'component', 'service', 'dependency', 'injection', 'directive', 'module', 'template'
-  ];
+  private words: string[] = ['angular', 'typescript', 'javascript', 'html', 'css'];
 
-  getRandomWord() {
+  constructor() { }
+
+  getRandomWord(): string {
     const randomIndex = Math.floor(Math.random() * this.words.length);
     return this.words[randomIndex];
   }
